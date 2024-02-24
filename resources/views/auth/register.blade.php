@@ -7,7 +7,7 @@
             <div class="col-lg-4 mx-auto">
                 <form class="mt-4" action="/register" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <h1  class="mb-3">Registrati</h1>
+                    <h1 style="font-size: 60px;color:#5C0B0B;text-shadow:2px 2px 2px black;" class="mb-3">Registrati</h1>
                     <div class="mb-3">
                         <label   for="name" class="form-label">Nome</label>
                         <input name="name" type="text" class="form-control" id="name">
