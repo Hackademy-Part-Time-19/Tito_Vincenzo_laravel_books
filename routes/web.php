@@ -22,3 +22,5 @@ Route::get('/', function()
 
 
 Route::resource('books', BookController::class);
+
+Route::get('user/books', [BookController::class, 'userBooks'])->name('user.books')->middleware('auth');

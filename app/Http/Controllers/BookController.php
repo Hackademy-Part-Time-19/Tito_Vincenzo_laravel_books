@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookStoreRequest;
 use App\Models\Book;
+use App\Models\User;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
@@ -23,7 +25,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $genres = Genre::all();
+
+        return view('create', compact('genres'));
     }
 
     /**
@@ -32,8 +36,9 @@ class BookController extends Controller
     public function store(BookStoreRequest $request)
     {
         $validated = $request->validated();
-
-        Book::create(['title' => $validated['title'], 'year' => $validated['year'], 'genre' => $validated['genre']])->save();
+        $book = Book::create(['user_id' => auth()->user()->id, 'title' => $validated['title'], 'price' => $validated['price']]);
+      
+        $book->genres()->attach($request->genres);
 
         return redirect()->back()->with(['success' => 'Libro inserito con successo']);
     }
@@ -61,7 +66,7 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-       Book::updated(['title' => $validated['title'], 'year' => $validated['year'], 'genre' => $validated['genre']]);
+        Book::updated(['user_id ' => auth()->user()->id, 'title' => $validated['title'], 'year' => $validated['year'], 'genre' => $validated['genre']]);
 
         return redirect()->back()->with(['success' => 'Libro modificato con successo']);
     }
@@ -73,7 +78,15 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        
-        return redirect()->back()->with(['deleted' => 'Libro eliminato correttamente']);
+
+        return redirect()->back()->with(['delete' => 'Libro eliminato correttamente']);
+    }
+
+    public function userBooks()
+    {
+
+        $books = auth()->user()->books;
+
+        return view('user.books', compact('books'));
     }
 }

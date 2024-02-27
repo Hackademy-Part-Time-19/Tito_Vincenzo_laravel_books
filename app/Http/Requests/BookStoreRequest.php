@@ -24,8 +24,8 @@ class BookStoreRequest extends FormRequest
         return [
 
             'title' => 'required|max:20',
-            'year' => 'required|max:4',
-            'genre' => 'required'
+            'price' => 'required',
+            'genres' => 'required'
         ];
     }
 
@@ -33,10 +33,9 @@ class BookStoreRequest extends FormRequest
     {
         return[
             'title.required' => 'Il titolo non è stato specificato',
-            'title.max' => 'Il titolo deve contenere massimo di 20 caratteri',
-            'year.required' => "L'anno non è stato specificata",
-            'year.max' =>"L'anno deve contenere massimo 4 caratteri",
-            'genre.required' => 'Il genere deve essere selezionato',
+            'title.max' => 'Il titolo deve contenere massimo di 50 caratteri',
+            'price.required' => "il prezzo non è stato specificato",
+            'genres.required' => 'Il genere deve essere selezionato',
             
             
         ];

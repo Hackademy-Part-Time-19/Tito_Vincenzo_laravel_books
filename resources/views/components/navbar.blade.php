@@ -11,6 +11,12 @@
                 <li style="padding-left: 30px" id="navlink" class="nav-item">
                     <a style="color:#B13E0C; font-weight:800;font-size:18px;" class="nav-link active" href="{{ route('books.index')}}">Libri</a>
                 </li>
+                @auth
+                <li style="padding-left: 30px" id="navlink" class="nav-item">
+                    <a style="color:#B13E0C; font-weight:800;font-size:18px;" class="nav-link active" href="{{ route('user.books')}}">I tuoi Libri</a>
+                </li>
+                @endauth
+               
                 <li style="padding-left: 30px" id="navlink" class="nav-item">
                     <a style="color:#B13E0C; font-weight:800;font-size:18px;" class="nav-link active" href="{{ route('books.create')}}">Inserisci nuovo libro </a>
                 </li>
